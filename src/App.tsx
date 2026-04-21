@@ -13,7 +13,6 @@ const Navbar = () => {
             <div className="w-5 h-5 bg-brand-navy rotate-45 shrink-0 shadow-[0_0_20px_rgba(191,255,0,0.4)] transition-transform group-hover:scale-110 group-active:scale-90"></div>
             <div className="flex flex-col leading-[1.1]">
               <span className="text-[14px] md:text-[16px] font-black uppercase tracking-[0.18em] text-white">Arnau Anfruns</span>
-              <span className="text-[14px] md:text-[16px] font-black uppercase tracking-[0.18em] text-white">Studio</span>
             </div>
           </div>
         </a>
@@ -102,7 +101,7 @@ const About = () => {
             </div>
             <div className="mt-12 flex items-center gap-6">
                <div className="w-12 h-px bg-brand-navy"></div>
-               <span className="text-[10px] font-black tracking-[0.3em] uppercase text-white/50">BCN // Arnau Anfruns Studio</span>
+               <span className="text-[10px] font-black tracking-[0.3em] uppercase text-white/50">BCN // Arnau Anfruns</span>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -356,7 +355,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
         <div className="flex items-center gap-4">
           <div className="w-4 h-4 bg-brand-navy rotate-45"></div>
-          <span className="text-[10px] font-black uppercase tracking-[0.4em]">BCN // Arnau Anfruns Studio</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.4em]">BCN // Arnau Anfruns</span>
         </div>
         <div className="flex gap-10 text-[9px] font-black uppercase tracking-[0.2em] text-white/40">
            <span>© 2026 Arnau Anfruns. Todos los derechos reservados.</span>
