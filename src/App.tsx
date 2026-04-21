@@ -259,6 +259,7 @@ const SocialProof = () => {
             <div className="text-2xl font-black tracking-tighter uppercase">ASSESSORIA ANFRUNS</div>
             <div className="text-2xl font-black tracking-tighter uppercase italic">DAKE <span className="text-xs font-medium tracking-normal normal-case opacity-60 block">Culto a la Cocina</span></div>
             <div className="text-2xl font-black tracking-tighter uppercase italic border-b-4 border-brand-navy pb-1">SAV VILARÓ</div>
+            <div className="text-2xl font-black tracking-tighter uppercase">OBRES CODINACHS</div>
           </div>
         </div>
       </div>
