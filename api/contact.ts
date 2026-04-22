@@ -35,7 +35,10 @@ export default async function handler(req: any, res: any) {
     });
 
     if (error) {
-      return res.status(500).json({ error: "Failed to send email" });
+      return res.status(500).json({ 
+        error: "Error de Resend: " + (error.message || "Fallo en el envío"),
+        details: error 
+      });
     }
 
     return res.status(200).json({ success: true, data });

@@ -49,8 +49,11 @@ async function startServer() {
       });
 
       if (error) {
-        console.error("Resend Error:", error);
-        return res.status(500).json({ error: "Failed to send email" });
+        console.error("Resend Error Detail:", JSON.stringify(error, null, 2));
+        return res.status(500).json({ 
+          error: "Error de Resend: " + (error.message || "Fallo en el envío"),
+          details: error 
+        });
       }
 
       res.json({ success: true, data });
