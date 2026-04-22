@@ -9,7 +9,13 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-brand-white text-brand-black font-sans antialiased;
+  }
+  section {
+    scroll-margin-top: 128px;
   }
 }

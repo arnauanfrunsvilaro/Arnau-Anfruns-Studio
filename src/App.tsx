@@ -1,14 +1,63 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // --- Components ---
 
 const Navbar = () => {
+  const [activeLink, setActiveLink] = useState("");
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    const sections = ["sobre-mi", "servicios", "proceso", "contacto"];
+    const observerOptions = {
+      root: null,
+      rootMargin: "-130px 0px -80% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      if (isScrolling) return;
+      
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveLink(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [isScrolling]);
+
+  const handleNavClick = (id: string) => {
+    setActiveLink(id);
+    setIsScrolling(true);
+    // Remove the lock after the smooth scroll finishes (approx 1200ms for safety)
+    setTimeout(() => setIsScrolling(false), 1200);
+  };
+
+  const navLinks = [
+    { name: "Sobre mí", href: "#sobre-mi", id: "sobre-mi" },
+    { name: "Servicios", href: "#servicios", id: "servicios" },
+    { name: "Proceso", href: "#proceso", id: "proceso" },
+    { name: "Trabajemos juntos", href: "#contacto", id: "contacto" },
+  ];
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-brand-black/90 backdrop-blur-xl border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6 h-32 flex items-center justify-between">
-        <a href="#" className="flex items-center group transition-transform hover:scale-105 active:scale-95">
+        <a 
+          href="#" 
+          className="flex items-center group transition-transform hover:scale-105 active:scale-95"
+          onClick={() => handleNavClick("")}
+        >
           <div className="flex items-center gap-6">
             <div className="w-5 h-5 bg-brand-navy rotate-45 shrink-0 shadow-[0_0_20px_rgba(191,255,0,0.4)] transition-transform group-hover:scale-110 group-active:scale-90"></div>
             <div className="flex flex-col leading-[1.1]">
@@ -16,11 +65,21 @@ const Navbar = () => {
             </div>
           </div>
         </a>
-        <div className="hidden md:flex gap-12 text-[11px] font-bold uppercase tracking-[0.25em] text-white/50">
-          <a href="#sobre-mi" className="hover:text-brand-navy transition-colors">Sobre mí</a>
-          <a href="#servicios" className="hover:text-brand-navy transition-colors">Servicios</a>
-          <a href="#proceso" className="hover:text-brand-navy transition-colors">Proceso</a>
-          <a href="#contacto" className="text-brand-navy border-b border-brand-navy/30 pb-1">Trabajemos juntos</a>
+        <div className="hidden md:flex gap-12 text-[11px] font-bold uppercase tracking-[0.25em]">
+          {navLinks.map((link) => (
+            <a
+              key={link.id}
+              href={link.href}
+              onClick={() => handleNavClick(link.id)}
+              className={`transition-all duration-300 pb-1 ${
+                activeLink === link.id
+                  ? "text-brand-navy border-b-2 border-brand-navy"
+                  : "text-white/50 hover:text-brand-navy"
+              }`}
+            >
+              {link.name}
+            </a>
+          ))}
         </div>
       </div>
     </nav>
@@ -375,8 +434,8 @@ export default function App() {
       <Navbar />
       <Hero />
       <SocialProof />
-      <Services />
       <About />
+      <Services />
       <Results />
       <Process />
       <CTA />
