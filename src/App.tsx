@@ -122,16 +122,16 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section className="relative pt-48 pb-24 overflow-hidden min-h-screen flex items-center bg-brand-black text-brand-white">
+    <section className="relative pt-48 pb-24 min-h-screen flex items-center bg-brand-black text-brand-white overflow-x-hidden">
       {/* Background Accent Blur */}
-      <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-brand-navy rounded-full blur-[120px] opacity-10"></div>
+      <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-brand-navy rounded-full blur-[120px] opacity-10 pointer-events-none"></div>
       
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center relative z-10 w-full">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="md:col-span-8"
+          className="md:col-span-8 w-full"
         >
           <div className="inline-block px-3 py-1 border border-brand-navy/30 rounded-full mb-8">
             <span className="text-[10px] uppercase tracking-[0.3em] font-black text-brand-navy flex items-center gap-2">
@@ -139,7 +139,7 @@ const Hero = () => {
               Marketing & Publicidad v2026
             </span>
           </div>
-          <h1 className="text-2xl sm:text-6xl md:text-[100px] leading-[1.1] md:leading-[0.85] font-black tracking-tighter mb-8 uppercase break-words">
+          <h1 className="text-3xl sm:text-6xl lg:text-[90px] xl:text-[100px] leading-[1.1] md:leading-[0.85] font-black tracking-tighter mb-8 uppercase break-words hyphens-none">
             Estrategia con <span className="text-brand-navy">Criterio.</span><br className="hidden sm:block" />
             Resultados con <span className="text-white/20">Impacto.</span>
           </h1>
@@ -361,12 +361,14 @@ const SocialProof = () => {
 
 const CTA = () => {
   const [sent, setSent] = useState(false);
+  const [simulation, setSimulation] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setSimulation(false);
     setError(null);
 
     const formData = new FormData(e.currentTarget);
@@ -383,9 +385,14 @@ const CTA = () => {
         body: JSON.stringify(data),
       });
 
+      const resData = await response.json().catch(() => ({}));
+
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || "Error al enviar la solicitud");
+        throw new Error(resData.error || "Error al enviar la solicitud");
+      }
+
+      if (resData.simulated) {
+        setSimulation(true);
       }
 
       setSent(true);
@@ -398,13 +405,21 @@ const CTA = () => {
   };
 
   return (
-    <section id="contacto" className="py-40 bg-brand-black text-brand-white relative">
+    <section id="contacto" className="py-20 md:py-40 bg-brand-black text-brand-white relative">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-tighter mb-12 italic leading-none">Directo al <span className="text-brand-navy underline underline-offset-8">Objetivo.</span></h2>
         
         {sent ? (
-          <div className="p-10 md:p-20 bg-brand-navy text-brand-black font-black uppercase tracking-widest text-xl md:text-2xl">
-            Solicitud Enviada // 2026
+          <div className="flex flex-col gap-6">
+            <div className="p-10 md:p-20 bg-brand-navy text-brand-black font-black uppercase tracking-widest text-xl md:text-2xl">
+              Solicitud Enviada // 2026
+            </div>
+            {simulation && (
+              <div className="bg-brand-navy/10 border border-brand-navy/30 p-6 text-brand-navy">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-2">MODO SIMULACIÓN ACTIVADO</p>
+                <p className="text-sm font-medium">El formulario funciona, pero no se envió el correo real porque no se ha configurado la <strong>RESEND_API_KEY</strong> en los secretos del proyecto.</p>
+              </div>
+            )}
           </div>
         ) : (
           <form 
