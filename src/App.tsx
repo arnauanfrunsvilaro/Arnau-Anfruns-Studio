@@ -385,10 +385,18 @@ const CTA = () => {
         body: JSON.stringify(data),
       });
 
-      const resData = await response.json().catch(() => ({}));
+      let resData: any = {};
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        resData = await response.json();
+      } else {
+        const text = await response.text();
+        console.error("Non-JSON response:", text);
+        throw new Error(`Server returned ${response.status}: ${text.slice(0, 50)}...`);
+      }
 
       if (!response.ok) {
-        throw new Error(resData.error || "Error al enviar la solicitud");
+        throw new Error(resData.error || `Error ${response.status}: Al enviar la solicitud`);
       }
 
       if (resData.simulated) {

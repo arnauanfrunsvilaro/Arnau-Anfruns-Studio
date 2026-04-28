@@ -10,7 +10,17 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to avoid crashing on startup if key is missing
+let resendClient: Resend | null = null;
+const getResend = () => {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return null;
+  if (!resendClient) {
+    resendClient = new Resend(key);
+  }
+  return resendClient;
+};
+
 const RECEIVER_EMAIL = process.env.CONTACT_RECEIVER_EMAIL || "arnauanfruns@gmail.com";
 
 async function startServer() {
@@ -19,22 +29,36 @@ async function startServer() {
 
   app.use(express.json());
 
+  // Log all requests for debugging
+  app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+  });
+
+  // Health check
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", mode: process.env.NODE_ENV });
+  });
+
   // API Route for Contact Form
   app.post("/api/contact", async (req, res) => {
     const { brand, email, goal } = req.body;
+    console.log("Contact request received:", { brand, email });
 
     if (!brand || !email || !goal) {
-      return res.status(400).json({ error: "Missing required fields" });
+      return res.status(400).json({ error: "Faltan campos obligatorios" });
     }
 
     try {
-      if (!process.env.RESEND_API_KEY) {
+      const resend = getResend();
+      
+      if (!resend) {
         console.warn("RESEND_API_KEY is not set. Simulation mode active.");
         return res.json({ success: true, simulated: true });
       }
 
       const { data, error } = await resend.emails.send({
-        from: "Acme <onboarding@resend.dev>", // Note: For custom domains, you need to verify them in Resend
+        from: "Acme <onboarding@resend.dev>", 
         to: [RECEIVER_EMAIL],
         subject: `Nueva solicitud de auditoría: ${brand}`,
         html: `
@@ -52,14 +76,14 @@ async function startServer() {
         console.error("Resend Error Detail:", JSON.stringify(error, null, 2));
         return res.status(500).json({ 
           error: "Error de Resend: " + (error.message || "Fallo en el envío"),
-          details: error 
         });
       }
 
+      console.log("Email sent successfully:", data?.id);
       res.json({ success: true, data });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Server Error:", error);
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: error.message || "Internal server error" });
     }
   });
 
