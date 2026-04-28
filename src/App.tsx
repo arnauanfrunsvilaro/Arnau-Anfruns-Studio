@@ -388,11 +388,10 @@ const CTA = () => {
           </a>
 
           {/* Email Action */}
-          <div 
-            onClick={() => {
-              window.location.href = `mailto:${CONTACT_EMAIL}`;
-            }}
-            className="cursor-pointer group relative bg-white/5 border border-white/10 p-10 md:p-16 flex flex-col items-center justify-center gap-6 hover:bg-white hover:text-brand-black transition-all duration-500 overflow-hidden"
+          <a 
+            href={`mailto:${CONTACT_EMAIL}`}
+            target="_top"
+            className="group relative bg-white/5 border border-white/10 p-10 md:p-16 flex flex-col items-center justify-center gap-6 hover:bg-white hover:text-brand-black transition-all duration-500 overflow-hidden"
           >
             <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
               <Mail size={80} />
@@ -406,7 +405,7 @@ const CTA = () => {
                <span className="text-[10px] font-black uppercase tracking-widest">Enviar ahora</span>
                <ArrowRight size={20} />
             </div>
-          </div>
+          </a>
         </div>
 
         <p className="mt-16 text-white/30 text-[10px] font-black uppercase tracking-[0.5em]">Respuesta en menos de 24h</p>
