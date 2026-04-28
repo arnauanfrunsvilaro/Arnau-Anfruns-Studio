@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X } from "lucide-react";
+import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X, Instagram, Mail } from "lucide-react";
 import { useState, useEffect, FormEvent } from "react";
 
 // --- Components ---
@@ -360,108 +360,56 @@ const SocialProof = () => {
 };
 
 const CTA = () => {
-  const [sent, setSent] = useState(false);
-  const [simulation, setSimulation] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setSimulation(false);
-    setError(null);
-
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      brand: formData.get("brand"),
-      email: formData.get("email"),
-      goal: formData.get("goal"),
-    };
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      let resData: any = {};
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
-        resData = await response.json();
-      } else {
-        const text = await response.text();
-        console.error("Non-JSON response:", text);
-        throw new Error(`Server returned ${response.status}: ${text.slice(0, 50)}...`);
-      }
-
-      if (!response.ok) {
-        throw new Error(resData.error || `Error ${response.status}: Al enviar la solicitud`);
-      }
-
-      if (resData.simulated) {
-        setSimulation(true);
-      }
-
-      setSent(true);
-    } catch (err: any) {
-      console.error(err);
-      setError(err.message || "No se pudo enviar la solicitud. Por favor, inténtalo de nuevo.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const CONTACT_EMAIL = "arnauanfrunsmarketing@gmail.com";
+  const INSTAGRAM_URL = "https://www.instagram.com/anfruns_studio/";
 
   return (
     <section id="contacto" className="py-20 md:py-40 bg-brand-black text-brand-white relative">
-      <div className="absolute top-4 right-4 text-[8px] text-white/10 font-mono tracking-widest">V3.0-SERVER-STABLE</div>
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-tighter mb-12 italic leading-none">Directo al <span className="text-brand-navy underline underline-offset-8">Objetivo.</span></h2>
         
-        {sent ? (
-          <div className="flex flex-col gap-6">
-            <div className="p-10 md:p-20 bg-brand-navy text-brand-black font-black uppercase tracking-widest text-xl md:text-2xl">
-              Solicitud Enviada // 2026
-            </div>
-            {simulation && (
-              <div className="bg-brand-navy/10 border border-brand-navy/30 p-6 text-brand-navy">
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-2">MODO SIMULACIÓN ACTIVADO</p>
-                <p className="text-sm font-medium">El formulario funciona, pero no se envió el correo real porque no se ha configurado la <strong>RESEND_API_KEY</strong> en los secretos del proyecto.</p>
-              </div>
-            )}
-          </div>
-        ) : (
-          <form 
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-10 text-left bg-white/5 p-8 md:p-16 border border-white/10"
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mt-16">
+          {/* Instagram Action */}
+          <a 
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative bg-white/5 border border-white/10 p-10 md:p-16 flex flex-col items-center justify-center gap-6 hover:bg-brand-navy hover:text-brand-black transition-all duration-500 overflow-hidden"
           >
-            {error && (
-              <div className="p-4 bg-red-500/20 border border-red-500 text-red-500 text-xs font-bold uppercase tracking-widest">
-                {error}
-              </div>
-            )}
-            <div className="grid md:grid-cols-2 gap-10">
-              <div className="flex flex-col gap-4">
-                <label className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Marca / Identidad</label>
-                <input required name="brand" type="text" className="bg-transparent border-b border-white/20 p-4 focus:outline-none focus:border-brand-navy font-black text-lg md:text-xl transition-all uppercase" placeholder="NOMBRE DE TU MARCA" />
-              </div>
-              <div className="flex flex-col gap-4">
-                <label className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Email corporativo</label>
-                <input required name="email" type="email" className="bg-transparent border-b border-white/20 p-4 focus:outline-none focus:border-brand-navy font-black text-lg md:text-xl transition-all uppercase" placeholder="CEO@TUDOMINIO.COM" />
-              </div>
+            <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Instagram size={80} />
             </div>
-            <div className="flex flex-col gap-4">
-              <label className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Objetivo estratégico</label>
-              <textarea required name="goal" className="bg-transparent border-b border-white/20 p-4 focus:outline-none focus:border-brand-navy font-black text-lg md:text-xl transition-all h-32 resize-none uppercase" placeholder="DESCRIBE TU META A 6 MESES..."></textarea>
+            <Instagram size={48} className="text-brand-navy group-hover:text-brand-black transition-colors" />
+            <div className="text-center">
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-2 opacity-50">Social Direct</p>
+              <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight">Instagram DM</h3>
             </div>
-            <button 
-              disabled={loading}
-              className="bg-brand-navy text-brand-black p-6 md:p-8 text-lg md:text-xl font-black uppercase tracking-[0.3em] hover:bg-white disabled:opacity-50 disabled:cursor-wait transition-all shadow-2xl shadow-brand-navy/10 flex items-center justify-center gap-4"
-            >
-              {loading ? "Enviando..." : "Enviar Solicitud"} <ArrowRight size={24} />
-            </button>
-          </form>
-        )}
+            <ArrowRight size={24} className="opacity-0 group-hover:opacity-100 transition-all translate-x-[-20px] group-hover:translate-x-0" />
+          </a>
+
+          {/* Email Action */}
+          <div 
+            onClick={() => {
+              window.location.href = `mailto:${CONTACT_EMAIL}`;
+            }}
+            className="cursor-pointer group relative bg-white/5 border border-white/10 p-10 md:p-16 flex flex-col items-center justify-center gap-6 hover:bg-white hover:text-brand-black transition-all duration-500 overflow-hidden"
+          >
+            <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Mail size={80} />
+            </div>
+            <Mail size={48} className="text-brand-navy group-hover:text-brand-black transition-colors" />
+            <div className="text-center">
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-2 opacity-50">E-mail Directo</p>
+              <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight">{CONTACT_EMAIL}</h3>
+            </div>
+            <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all translate-x-[-20px] group-hover:translate-x-0">
+               <span className="text-[10px] font-black uppercase tracking-widest">Enviar ahora</span>
+               <ArrowRight size={20} />
+            </div>
+          </div>
+        </div>
+
+        <p className="mt-16 text-white/30 text-[10px] font-black uppercase tracking-[0.5em]">Respuesta en menos de 24h</p>
       </div>
     </section>
   );
