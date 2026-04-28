@@ -362,48 +362,71 @@ const SocialProof = () => {
 const CTA = () => {
   const CONTACT_EMAIL = "arnauanfrunsmarketing@gmail.com";
   const INSTAGRAM_URL = "https://www.instagram.com/anfruns_studio/";
+  const [copied, setCopied] = useState(false);
+
+  const handleEmailClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Copiar al portapapeles
+    navigator.clipboard.writeText(CONTACT_EMAIL);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+    
+    // Abrir Gmail Web directamente
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}`, '_blank');
+  };
 
   return (
-    <section id="contacto" className="py-20 md:py-40 bg-brand-black text-brand-white relative">
-      <div className="max-w-4xl mx-auto px-6 text-center">
-        <h2 className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-tighter mb-12 italic leading-none">Directo al <span className="text-brand-navy underline underline-offset-8">Objetivo.</span></h2>
+    <section id="contacto" className="py-16 md:py-32 bg-brand-black text-brand-white relative">
+      <div className="max-w-3xl mx-auto px-6 text-center">
+        <h2 className="text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8 italic leading-none">Directo al <span className="text-brand-navy underline underline-offset-8">Objetivo.</span></h2>
         
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mt-16">
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-6 mt-12">
           {/* Instagram Action */}
           <a 
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative bg-white/5 border border-white/10 p-10 md:p-16 flex flex-col items-center justify-center gap-6 hover:bg-brand-navy hover:text-brand-black transition-all duration-500 overflow-hidden"
+            className="group relative bg-white/5 border border-white/10 p-8 md:p-12 flex flex-col items-center justify-center gap-4 hover:bg-brand-navy hover:text-brand-black transition-all duration-500 overflow-hidden"
           >
-            <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Instagram size={80} />
+            <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+              <Instagram size={60} />
             </div>
-            <Instagram size={48} className="text-brand-navy group-hover:text-brand-black transition-colors" />
+            <Instagram size={40} className="text-brand-navy group-hover:text-brand-black transition-colors" />
             <div className="text-center">
-              <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-2 opacity-50">Social Direct</p>
-              <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight">Instagram DM</h3>
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-1 opacity-50">Social Direct</p>
+              <h3 className="text-lg md:text-xl font-black uppercase tracking-tight">Instagram DM</h3>
             </div>
-            <ArrowRight size={24} className="opacity-0 group-hover:opacity-100 transition-all translate-x-[-20px] group-hover:translate-x-0" />
+            <ArrowRight size={20} className="opacity-0 group-hover:opacity-100 transition-all translate-x-[-20px] group-hover:translate-x-0" />
           </a>
 
           {/* Email Action */}
           <a 
-            href={`mailto:${CONTACT_EMAIL}`}
+            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}`}
             target="_top"
-            className="group relative bg-white/5 border border-white/10 p-10 md:p-16 flex flex-col items-center justify-center gap-6 hover:bg-white hover:text-brand-black transition-all duration-500 overflow-hidden"
+            onClick={handleEmailClick}
+            className="group relative bg-white/5 border border-white/10 p-4 py-8 sm:p-10 md:p-12 flex flex-col items-center justify-center gap-4 hover:bg-white hover:text-brand-black transition-all duration-500"
           >
-            <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Mail size={80} />
+            <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+              <Mail size={40} />
             </div>
-            <Mail size={48} className="text-brand-navy group-hover:text-brand-black transition-colors" />
-            <div className="text-center">
-              <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-2 opacity-50">E-mail Directo</p>
-              <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight">{CONTACT_EMAIL}</h3>
+            {copied ? (
+              <CheckCircle2 size={32} className="text-green-500 transition-colors" />
+            ) : (
+              <Mail size={32} className="text-brand-navy group-hover:text-brand-black transition-colors" />
+            )}
+            <div className="text-center w-full px-1">
+              <p className="text-[9px] font-black uppercase tracking-[0.4em] mb-1 opacity-50">
+                {copied ? "Dirección Copiada" : "E-mail Directo"}
+              </p>
+              <h3 className="text-[8.5px] xs:text-[10px] sm:text-sm md:text-base font-black uppercase tracking-tighter leading-tight break-all">
+                {CONTACT_EMAIL}
+              </h3>
             </div>
             <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all translate-x-[-20px] group-hover:translate-x-0">
-               <span className="text-[10px] font-black uppercase tracking-widest">Enviar ahora</span>
-               <ArrowRight size={20} />
+               <span className="text-[9px] font-black uppercase tracking-widest text-inherit">
+                 {copied ? "¡Listo!" : "Abrir Gmail"}
+               </span>
+               <ArrowRight size={16} />
             </div>
           </a>
         </div>
