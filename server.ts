@@ -41,9 +41,9 @@ async function startServer() {
   });
 
   // API Route for Contact Form
-  app.post("/submit-contact", async (req, res) => {
+  app.post("/api/contact", async (req, res) => {
     const { brand, email, goal } = req.body;
-    console.log("Contact request received:", { brand, email });
+    console.log("POST /api/contact - Body:", { brand, email });
 
     if (!brand || !email || !goal) {
       return res.status(400).json({ error: "Faltan campos obligatorios" });

@@ -379,7 +379,7 @@ const CTA = () => {
     };
 
     try {
-      const response = await fetch("/submit-contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -414,7 +414,7 @@ const CTA = () => {
 
   return (
     <section id="contacto" className="py-20 md:py-40 bg-brand-black text-brand-white relative">
-      <div className="absolute top-4 right-4 text-[8px] text-white/10 font-mono tracking-widest">V2.1-DEBUG</div>
+      <div className="absolute top-4 right-4 text-[8px] text-white/10 font-mono tracking-widest">V3.0-SERVER-STABLE</div>
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-tighter mb-12 italic leading-none">Directo al <span className="text-brand-navy underline underline-offset-8">Objetivo.</span></h2>
         
