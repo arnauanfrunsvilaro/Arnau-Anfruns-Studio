@@ -1,12 +1,13 @@
 import { motion } from "motion/react";
-import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit } from "lucide-react";
-import { useState, useEffect } from "react";
+import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X } from "lucide-react";
+import { useState, useEffect, FormEvent } from "react";
 
 // --- Components ---
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState("");
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const sections = ["sobre-mi", "servicios", "proceso", "contacto"];
@@ -39,6 +40,7 @@ const Navbar = () => {
   const handleNavClick = (id: string) => {
     setActiveLink(id);
     setIsScrolling(true);
+    setIsMobileMenuOpen(false);
     // Remove the lock after the smooth scroll finishes (approx 1200ms for safety)
     setTimeout(() => setIsScrolling(false), 1200);
   };
@@ -52,19 +54,21 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-brand-black/90 backdrop-blur-xl border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-6 h-32 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-20 md:h-32 flex items-center justify-between">
         <a 
           href="#" 
           className="flex items-center group transition-transform hover:scale-105 active:scale-95"
           onClick={() => handleNavClick("")}
         >
-          <div className="flex items-center gap-6">
-            <div className="w-5 h-5 bg-brand-navy rotate-45 shrink-0 shadow-[0_0_20px_rgba(191,255,0,0.4)] transition-transform group-hover:scale-110 group-active:scale-90"></div>
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="w-4 h-4 md:w-5 md:h-5 bg-brand-navy rotate-45 shrink-0 shadow-[0_0_20px_rgba(191,255,0,0.4)] transition-transform group-hover:scale-110 group-active:scale-90"></div>
             <div className="flex flex-col leading-[1.1]">
-              <span className="text-[14px] md:text-[16px] font-black uppercase tracking-[0.18em] text-white">Arnau Anfruns</span>
+              <span className="text-[12px] md:text-[16px] font-black uppercase tracking-[0.18em] text-white">Arnau Anfruns</span>
             </div>
           </div>
         </a>
+
+        {/* Desktop Menu */}
         <div className="hidden md:flex gap-12 text-[11px] font-bold uppercase tracking-[0.25em]">
           {navLinks.map((link) => (
             <a
@@ -81,7 +85,37 @@ const Navbar = () => {
             </a>
           ))}
         </div>
+
+        {/* Mobile menu button */}
+        <button 
+          className="md:hidden text-white p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="md:hidden absolute top-20 left-0 w-full bg-brand-black border-b border-white/10 p-10 flex flex-col gap-8"
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.id}
+              href={link.href}
+              onClick={() => handleNavClick(link.id)}
+              className={`text-xl font-black uppercase tracking-[0.2em] transition-all ${
+                activeLink === link.id ? "text-brand-navy" : "text-white/50"
+              }`}
+            >
+              {link.name}
+            </a>
+          ))}
+        </motion.div>
+      )}
     </nav>
   );
 };
@@ -105,11 +139,11 @@ const Hero = () => {
               Marketing & Publicidad v2026
             </span>
           </div>
-          <h1 className="text-[64px] md:text-[100px] leading-[0.85] font-black tracking-tighter mb-8 uppercase">
-            Estrategia con <span className="text-brand-navy">Criterio.</span><br />
+          <h1 className="text-2xl sm:text-6xl md:text-[100px] leading-[1.1] md:leading-[0.85] font-black tracking-tighter mb-8 uppercase break-words">
+            Estrategia con <span className="text-brand-navy">Criterio.</span><br className="hidden sm:block" />
             Resultados con <span className="text-white/20">Impacto.</span>
           </h1>
-          <p className="text-xl text-white/50 mb-12 max-w-xl leading-relaxed font-medium">
+          <p className="text-lg md:text-xl text-white/50 mb-12 max-w-xl leading-relaxed font-medium">
             Consultoría estratégica especializada en escalar marcas personales mediante <span className="text-brand-white">Publicidad de Alto Rendimiento</span> y Relaciones Públicas con impacto real.
           </p>
           <div className="flex flex-col sm:flex-row gap-8 items-center">
@@ -163,22 +197,22 @@ const About = () => {
                <span className="text-[10px] font-black tracking-[0.3em] uppercase text-white/50">BCN // Arnau Anfruns</span>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-             <div className="p-10 bg-white/5 border border-white/10 flex flex-col justify-center">
-               <span className="text-6xl font-black mb-2 tracking-tighter">07</span>
-               <span className="text-[9px] uppercase tracking-[0.2em] text-white/40 font-black">Años de Experiencia</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+             <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center">
+               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">07</span>
+               <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-white/40 font-black">Años de Experiencia</span>
              </div>
-             <div className="p-10 bg-brand-navy text-brand-black flex flex-col justify-center">
-               <span className="text-6xl font-black mb-2 tracking-tighter">+50</span>
-               <span className="text-[9px] uppercase tracking-[0.2em] font-black">Clientes</span>
+             <div className="p-6 sm:p-10 bg-brand-navy text-brand-black flex flex-col justify-center">
+               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">+50</span>
+               <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-black">Clientes</span>
              </div>
-             <div className="p-10 bg-white/5 border border-white/10 flex flex-col justify-center">
-               <span className="text-6xl font-black mb-2 tracking-tighter">12M</span>
-               <span className="text-[9px] uppercase tracking-[0.2em] text-white/40 font-black">Inversión Publicitaria</span>
+             <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center">
+               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">12M</span>
+               <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-white/40 font-black">Inversión Publicitaria</span>
              </div>
-             <div className="p-10 bg-white/5 border border-white/10 flex flex-col justify-center">
-               <span className="text-6xl font-black mb-2 tracking-tighter">240%</span>
-               <span className="text-[9px] uppercase tracking-[0.2em] text-brand-navy font-black">ROI Medio</span>
+             <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center">
+               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">240%</span>
+               <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-brand-navy font-black">ROI Medio</span>
              </div>
           </div>
         </div>
@@ -209,8 +243,8 @@ const Services = () => {
   return (
     <section id="servicios" className="py-32 bg-brand-black text-brand-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-baseline mb-20 border-b border-white/10 pb-10">
-          <h2 className="text-6xl font-black tracking-tighter uppercase leading-none">Especialización.</h2>
+        <div className="flex flex-col md:flex-row justify-between items-baseline mb-20 border-b border-white/10 pb-10 gap-4">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none">Especialización.</h2>
           <span className="text-[10px] uppercase tracking-[0.4em] text-white/30 font-black">Especialidades</span>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
@@ -242,7 +276,7 @@ const Results = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-12 gap-20 items-center">
           <div className="md:col-span-12 mb-10">
-             <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none text-center">Impacto real.</h2>
+             <h2 className="text-4xl md:text-8xl font-black uppercase tracking-tighter leading-none text-center">Impacto real.</h2>
           </div>
           
           <div className="md:col-span-6 space-y-10">
@@ -286,14 +320,14 @@ const Process = () => {
   return (
     <section id="proceso" className="py-24 bg-brand-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-left mb-20 border-b border-brand-black pb-10 flex flex-col md:flex-row justify-between items-end gap-6">
-          <h2 className="text-6xl font-bold tracking-tighter">El Proceso.</h2>
+        <div className="text-left mb-20 border-b border-brand-black pb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter">El Proceso.</h2>
           <p className="text-sm font-black uppercase tracking-widest text-brand-black">De la auditoría al escalado</p>
         </div>
-        <div className="grid md:grid-cols-4 gap-12">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-12">
           {steps.map((s, i) => (
             <div key={i} className="relative group">
-              <div className="text-8xl font-black text-gray-200 mb-4 group-hover:text-brand-navy/20 transition-colors border-b border-gray-200 pb-4">0{i+1}</div>
+              <div className="text-6xl md:text-8xl font-black text-gray-200 mb-4 group-hover:text-brand-navy/20 transition-colors border-b border-gray-200 pb-4">0{i+1}</div>
               <div className="relative">
                 <h4 className="text-lg font-bold mb-4 tracking-tight uppercase">
                   {s.title}
@@ -314,10 +348,10 @@ const SocialProof = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col items-center gap-16">
           <p className="text-xs font-black uppercase tracking-[0.5em] text-gray-300">LÍDERES QUE CONFÍAN 2026</p>
-          <div className="flex flex-wrap justify-center gap-x-16 gap-y-12 items-center opacity-30 grayscale saturate-0 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
-            <div className="text-2xl font-black tracking-tighter uppercase">ASSESSORIA ANFRUNS</div>
-            <div className="text-2xl font-black tracking-tighter uppercase italic">DAKE <span className="text-xs font-medium tracking-normal normal-case opacity-60 block">Culto a la Cocina</span></div>
-            <div className="text-2xl font-black tracking-tighter uppercase italic border-b-4 border-brand-navy pb-1">SAV VILARÓ</div>
+          <div className="flex flex-wrap justify-center gap-x-8 md:gap-x-16 gap-y-12 items-center opacity-30 grayscale saturate-0 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
+            <div className="text-xl md:text-2xl font-black tracking-tighter uppercase text-center">ASSESSORIA ANFRUNS</div>
+            <div className="text-xl md:text-2xl font-black tracking-tighter uppercase italic text-center">DAKE <span className="text-[10px] font-medium tracking-normal normal-case opacity-60 block">Culto a la Cocina</span></div>
+            <div className="text-xl md:text-2xl font-black tracking-tighter uppercase italic border-b-4 border-brand-navy pb-1 text-center">SAV VILARÓ</div>
           </div>
         </div>
       </div>
@@ -330,7 +364,7 @@ const CTA = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -366,16 +400,16 @@ const CTA = () => {
   return (
     <section id="contacto" className="py-40 bg-brand-black text-brand-white relative">
       <div className="max-w-4xl mx-auto px-6 text-center">
-        <h2 className="text-6xl md:text-9xl font-black uppercase tracking-tighter mb-12 italic leading-none">Directo al <span className="text-brand-navy underline underline-offset-8">Objetivo.</span></h2>
+        <h2 className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-tighter mb-12 italic leading-none">Directo al <span className="text-brand-navy underline underline-offset-8">Objetivo.</span></h2>
         
         {sent ? (
-          <div className="p-20 bg-brand-navy text-brand-black font-black uppercase tracking-widest text-2xl">
+          <div className="p-10 md:p-20 bg-brand-navy text-brand-black font-black uppercase tracking-widest text-xl md:text-2xl">
             Solicitud Enviada // 2026
           </div>
         ) : (
           <form 
             onSubmit={handleSubmit}
-            className="flex flex-col gap-10 text-left bg-white/5 p-16 border border-white/10"
+            className="flex flex-col gap-10 text-left bg-white/5 p-8 md:p-16 border border-white/10"
           >
             {error && (
               <div className="p-4 bg-red-500/20 border border-red-500 text-red-500 text-xs font-bold uppercase tracking-widest">
@@ -385,22 +419,22 @@ const CTA = () => {
             <div className="grid md:grid-cols-2 gap-10">
               <div className="flex flex-col gap-4">
                 <label className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Marca / Identidad</label>
-                <input required name="brand" type="text" className="bg-transparent border-b border-white/20 p-4 focus:outline-none focus:border-brand-navy font-black text-xl transition-all uppercase" placeholder="NOMBRE DE TU MARCA" />
+                <input required name="brand" type="text" className="bg-transparent border-b border-white/20 p-4 focus:outline-none focus:border-brand-navy font-black text-lg md:text-xl transition-all uppercase" placeholder="NOMBRE DE TU MARCA" />
               </div>
               <div className="flex flex-col gap-4">
                 <label className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Email corporativo</label>
-                <input required name="email" type="email" className="bg-transparent border-b border-white/20 p-4 focus:outline-none focus:border-brand-navy font-black text-xl transition-all uppercase" placeholder="CEO@TUDOMINIO.COM" />
+                <input required name="email" type="email" className="bg-transparent border-b border-white/20 p-4 focus:outline-none focus:border-brand-navy font-black text-lg md:text-xl transition-all uppercase" placeholder="CEO@TUDOMINIO.COM" />
               </div>
             </div>
             <div className="flex flex-col gap-4">
               <label className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Objetivo estratégico</label>
-              <textarea required name="goal" className="bg-transparent border-b border-white/20 p-4 focus:outline-none focus:border-brand-navy font-black text-xl transition-all h-32 resize-none uppercase" placeholder="DESCRIBE TU META A 6 MESES..."></textarea>
+              <textarea required name="goal" className="bg-transparent border-b border-white/20 p-4 focus:outline-none focus:border-brand-navy font-black text-lg md:text-xl transition-all h-32 resize-none uppercase" placeholder="DESCRIBE TU META A 6 MESES..."></textarea>
             </div>
             <button 
               disabled={loading}
-              className="bg-brand-navy text-brand-black p-8 text-xl font-black uppercase tracking-[0.3em] hover:bg-white disabled:opacity-50 disabled:cursor-wait transition-all shadow-2xl shadow-brand-navy/10 flex items-center justify-center gap-4"
+              className="bg-brand-navy text-brand-black p-6 md:p-8 text-lg md:text-xl font-black uppercase tracking-[0.3em] hover:bg-white disabled:opacity-50 disabled:cursor-wait transition-all shadow-2xl shadow-brand-navy/10 flex items-center justify-center gap-4"
             >
-              {loading ? "Enviando..." : "Enviar Solicitud de Auditoría"} <ArrowRight size={24} />
+              {loading ? "Enviando..." : "Enviar Solicitud"} <ArrowRight size={24} />
             </button>
           </form>
         )}
