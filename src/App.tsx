@@ -379,7 +379,7 @@ const CTA = () => {
     };
 
     try {
-      const response = await fetch("/api/contact-v2", {
+      const response = await fetch("/submit-contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

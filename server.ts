@@ -41,7 +41,7 @@ async function startServer() {
   });
 
   // API Route for Contact Form
-  app.post("/api/contact-v2", async (req, res) => {
+  app.post("/submit-contact", async (req, res) => {
     const { brand, email, goal } = req.body;
     console.log("Contact request received:", { brand, email });
 
