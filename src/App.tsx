@@ -166,8 +166,8 @@ const Hero = () => {
         >
           <img 
             src={heroImage} 
-            alt="Estrategia y Criterio" 
-            className="object-cover w-full h-full grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-1000"
+            alt="Arnau Anfruns - Estrategia con Criterio" 
+            className="object-cover w-full h-full opacity-90 group-hover:opacity-100 transition-all duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent"></div>
         </motion.div>
