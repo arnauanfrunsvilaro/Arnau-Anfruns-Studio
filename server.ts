@@ -29,14 +29,14 @@ async function startServer() {
 
   app.use(express.json());
   
-  // Serve static files from /public directory explicitly
-  app.use(express.static(path.join(process.cwd(), "public")));
-
+  // Serve static files from the public directory
+  app.use(express.static(path.join(__dirname, "public")));
+  
   // Log all requests for debugging
   app.use((req, res, next) => {
-    if (req.url.endsWith(".png") || req.url.endsWith(".jpg") || req.url.endsWith(".svg")) {
+    if (req.url.includes(".png") || req.url.includes(".jpg") || req.url.includes(".svg") || req.url.includes("/assets/")) {
       console.log(`${new Date().toISOString()} - ASSET REQUEST: ${req.method} ${req.url}`);
-    } else {
+    } else if (!req.url.startsWith("/@vite") && !req.url.startsWith("/src")) {
       console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
     }
     next();
