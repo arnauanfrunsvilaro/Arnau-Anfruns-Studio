@@ -1,8 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X, Instagram, Mail } from "lucide-react";
 import { useState, useEffect, MouseEvent } from "react";
-import logo from "./assets/logo.png";
-import heroImage from "./assets/hero.png";
 
 // --- Components ---
 
@@ -63,7 +61,7 @@ const Navbar = () => {
           onClick={() => handleNavClick("")}
         >
           <img 
-            src={logo} 
+            src="/logo.png" 
             alt="Arnau Anfruns" 
             className="h-16 md:h-24 w-auto object-contain"
           />
@@ -165,7 +163,7 @@ const Hero = () => {
           className="hidden md:block md:col-span-4 relative aspect-[3/4] bg-white/5 border border-white/10 group overflow-hidden"
         >
           <img 
-            src={heroImage} 
+            src="/hero.png" 
             alt="Arnau Anfruns - Estrategia con Criterio" 
             className="object-cover w-full h-full opacity-90 group-hover:opacity-100 transition-all duration-1000"
           />
@@ -443,7 +441,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
         <div className="flex items-center gap-4">
           <img 
-            src={logo} 
+            src="/logo.png" 
             alt="Arnau Anfruns" 
             className="h-12 w-auto object-contain"
           />

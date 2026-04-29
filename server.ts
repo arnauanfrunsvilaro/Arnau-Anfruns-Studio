@@ -29,9 +29,16 @@ async function startServer() {
 
   app.use(express.json());
   
+  // Serve static files from /public directory explicitly
+  app.use(express.static(path.join(process.cwd(), "public")));
+
   // Log all requests for debugging
   app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    if (req.url.endsWith(".png") || req.url.endsWith(".jpg") || req.url.endsWith(".svg")) {
+      console.log(`${new Date().toISOString()} - ASSET REQUEST: ${req.method} ${req.url}`);
+    } else {
+      console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    }
     next();
   });
 
