@@ -28,6 +28,7 @@ async function startServer() {
   const PORT = 3000;
 
   app.use(express.json());
+  app.use(express.static("public"));
 
   // Log all requests for debugging
   app.use((req, res, next) => {
