@@ -163,7 +163,7 @@ const Hero = () => {
           className="hidden md:block md:col-span-4 relative aspect-[3/4] bg-white/5 border border-white/10 group overflow-hidden"
         >
           <img 
-            src="/hero.jpg" 
+            src="/hero.png" 
             alt="Estrategia y Criterio" 
             className="object-cover w-full h-full grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-1000"
           />
