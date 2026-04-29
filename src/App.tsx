@@ -205,7 +205,7 @@ const About = () => {
                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-white/40 font-black">Años de Experiencia</span>
              </div>
              <div className="p-6 sm:p-10 bg-brand-navy text-brand-black flex flex-col justify-center">
-               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">+50</span>
+               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">+10</span>
                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-black">Clientes</span>
              </div>
              <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center">
