@@ -28,11 +28,21 @@ async function startServer() {
   const PORT = 3000;
 
   app.use(express.json());
-  app.use(express.static("public"));
+  const publicPath = path.join(__dirname, "public");
+  
+  // In production, we serve static files ourselves. 
+  // In development, Vite middleware handles serving files from /public.
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(publicPath));
+  }
 
   // Log all requests for debugging
   app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    if (req.url.endsWith(".png") || req.url.endsWith(".jpg")) {
+      console.log(`${new Date().toISOString()} - ASSET REQUEST: ${req.method} ${req.url}`);
+    } else {
+      console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    }
     next();
   });
 
