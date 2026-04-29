@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X, Instagram, Mail } from "lucide-react";
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent, MouseEvent } from "react";
 
 // --- Components ---
 
@@ -60,12 +60,11 @@ const Navbar = () => {
           className="flex items-center group transition-transform hover:scale-105 active:scale-95"
           onClick={() => handleNavClick("")}
         >
-          <div className="flex items-center gap-4 md:gap-6">
-            <div className="w-4 h-4 md:w-5 md:h-5 bg-brand-navy rotate-45 shrink-0 shadow-[0_0_20px_rgba(191,255,0,0.4)] transition-transform group-hover:scale-110 group-active:scale-90"></div>
-            <div className="flex flex-col leading-[1.1]">
-              <span className="text-[12px] md:text-[16px] font-black uppercase tracking-[0.18em] text-white">Arnau Anfruns</span>
-            </div>
-          </div>
+          <img 
+            src="/logo.png" 
+            alt="Arnau Anfruns" 
+            className="h-16 md:h-24 w-auto object-contain"
+          />
         </a>
 
         {/* Desktop Menu */}
@@ -164,8 +163,8 @@ const Hero = () => {
           className="hidden md:block md:col-span-4 relative aspect-[3/4] bg-white/5 border border-white/10 group overflow-hidden"
         >
           <img 
-            src="https://picsum.photos/seed/arnau_portrait/800/1000" 
-            alt="Arnau Anfruns" 
+            src="/hero.jpg" 
+            alt="Estrategia y Criterio" 
             referrerPolicy="no-referrer"
             className="object-cover w-full h-full grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-1000"
           />
@@ -364,7 +363,7 @@ const CTA = () => {
   const INSTAGRAM_URL = "https://www.instagram.com/anfruns_studio/";
   const [copied, setCopied] = useState(false);
 
-  const handleEmailClick = (e: React.MouseEvent) => {
+  const handleEmailClick = (e: MouseEvent) => {
     e.preventDefault();
     // Copiar al portapapeles
     navigator.clipboard.writeText(CONTACT_EMAIL);
@@ -442,8 +441,12 @@ const Footer = () => {
     <footer className="py-20 bg-brand-black text-brand-white border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
         <div className="flex items-center gap-4">
-          <div className="w-4 h-4 bg-brand-navy rotate-45"></div>
-          <span className="text-[10px] font-black uppercase tracking-[0.4em]">BCN // Arnau Anfruns</span>
+          <img 
+            src="/logo.png" 
+            alt="Arnau Anfruns" 
+            className="h-12 w-auto object-contain"
+          />
+          <span className="text-[10px] font-black uppercase tracking-[0.4em]">BCN</span>
         </div>
         <div className="flex gap-10 text-[9px] font-black uppercase tracking-[0.2em] text-white/40">
            <span>© 2026 Arnau Anfruns. Todos los derechos reservados.</span>
