@@ -30,7 +30,7 @@ async function startServer() {
   app.use(express.json());
   
   // Serve static files from the public directory
-  app.use(express.static(path.join(__dirname, "public")));
+  app.use(express.static(path.join(process.cwd(), "public")));
   
   // Log all requests for debugging
   app.use((req, res, next) => {

@@ -1,8 +1,15 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X, Instagram, Mail } from "lucide-react";
 import { useState, useEffect, MouseEvent } from "react";
-import logo from "./assets/logo.png";
-import heroImage from "./assets/hero.png";
+
+const logo = `data:image/svg+xml;base64,${btoa(`
+<svg width="300" height="40" viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="40" fill="transparent"/>
+  <text x="0" y="30" fill="white" font-family="Inter, sans-serif" font-weight="900" font-size="24" letter-spacing="0.02em">ARNAU <tspan fill="#ccff00">ANFRUNS</tspan></text>
+</svg>
+`)}`;
+
+const heroImage = "/hero.png";
 
 // --- Components ---
 
@@ -56,7 +63,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-brand-black/90 backdrop-blur-xl border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-6 h-20 md:h-32 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-14 md:h-20 flex items-center justify-between">
         <a 
           href="#" 
           className="flex items-center group transition-transform hover:scale-105 active:scale-95"
@@ -65,7 +72,7 @@ const Navbar = () => {
           <img 
             src={logo} 
             alt="Arnau Anfruns" 
-            className="h-16 md:h-24 w-auto object-contain"
+            className="h-6 md:h-8 w-auto object-contain"
           />
         </a>
 
@@ -445,7 +452,7 @@ const Footer = () => {
           <img 
             src={logo} 
             alt="Arnau Anfruns" 
-            className="h-12 w-auto object-contain"
+            className="h-5 w-auto object-contain"
           />
           <span className="text-[10px] font-black uppercase tracking-[0.4em]">BCN</span>
         </div>
