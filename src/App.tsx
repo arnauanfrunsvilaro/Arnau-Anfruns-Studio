@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X, Instagram, Mail } from "lucide-react";
 import { useState, useEffect, MouseEvent } from "react";
-import heroImage from "./assets/hero.png";
+const heroImage = "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&auto=format&fit=crop";
 
 const logo = `data:image/svg+xml;base64,${btoa(`
 <svg width="300" height="40" viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -213,11 +213,11 @@ const About = () => {
                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-black">Clientes</span>
              </div>
              <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center items-center text-center">
-               <span className="text-3xl sm:text-5xl font-black mb-2 tracking-tighter">10K</span>
+               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">10K</span>
                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-white/40 font-black">Inversión Publicitaria</span>
              </div>
              <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center items-center text-center">
-               <span className="text-3xl sm:text-5xl font-black mb-2 tracking-tighter">120%</span>
+               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">120%</span>
                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-brand-navy font-black">ROI Medio</span>
              </div>
           </div>
