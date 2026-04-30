@@ -10,30 +10,14 @@ const logo = `data:image/svg+xml;base64,${btoa(`
 `)}`;
 
 const HeroGraphic = () => (
-  <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full transition-all duration-1000">
-    <defs>
-      <linearGradient id="techFade" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stopColor="#000" stopOpacity="0" />
-        <stop offset="90%" stopColor="#000" stopOpacity="0.3" />
-        <stop offset="100%" stopColor="#000" stopOpacity="0.6" />
-      </linearGradient>
-    </defs>
-
+  <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full grayscale transition-all duration-1000">
     <image 
-      href="/me.png" 
+      href="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=900&h=1600" 
       x="0" y="0" 
       width="900" height="1600" 
-      preserveAspectRatio="xMidYMax slice"
-      className="grayscale brightness-110 contrast-110"
+      preserveAspectRatio="xMidYMid slice"
     />
-
-    <rect width="900" height="1600" fill="url(#techFade)" pointerEvents="none" />
-    
-    <rect x="40" y="40" width="820" height="1520" stroke="#ccff00" strokeWidth="0.5" strokeOpacity="0.2" fill="none" />
-    
-    {Array.from({ length: 40 }).map((_, i) => (
-      <line key={`scan-${i}`} x1="0" y1={i * 40} x2="900" y2={i * 40} stroke="#ccff00" strokeWidth="0.2" strokeOpacity="0.05" />
-    ))}
+    <rect width="900" height="1600" stroke="#ccff00" strokeWidth="2" strokeOpacity="0.1" fill="none" />
   </svg>
 );
 
