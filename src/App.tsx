@@ -10,14 +10,40 @@ const logo = `data:image/svg+xml;base64,${btoa(`
 `)}`;
 
 const HeroGraphic = () => (
-  <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full grayscale transition-all duration-1000">
-    <image 
-      href="/me.png" 
-      x="0" y="0" 
-      width="900" height="1600" 
-      preserveAspectRatio="xMidYMid slice"
-    />
-    <rect width="900" height="1600" stroke="#ccff00" strokeWidth="2" strokeOpacity="0.1" fill="none" />
+  <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full transition-all duration-1000">
+    <defs>
+      <filter id="vectorIllustration" colorInterpolationFilters="sRGB">
+        <feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0 0 0 1 0" />
+        <feComponentTransfer>
+          <feFuncR type="discrete" tableValues="0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1" />
+          <feFuncG type="discrete" tableValues="0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1" />
+          <feFuncB type="discrete" tableValues="0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1" />
+        </feComponentTransfer>
+        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" />
+      </filter>
+      
+      <linearGradient id="techFade" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="#000" stopOpacity="0" />
+        <stop offset="90%" stopColor="#000" stopOpacity="0.4" />
+        <stop offset="100%" stopColor="#000" stopOpacity="0.6" />
+      </linearGradient>
+    </defs>
+
+    {/* User Portait with 'Vector' Filter Effect */}
+    <g filter="url(#vectorIllustration)">
+      <image 
+        href="/me.png" 
+        x="0" y="0" 
+        width="900" height="1600" 
+        preserveAspectRatio="xMidYMax slice"
+      />
+    </g>
+
+    {/* Overlays */}
+    <rect width="900" height="1600" fill="url(#techFade)" pointerEvents="none" />
+    
+    {/* Frame accents */}
+    <rect x="40" y="40" width="820" height="1520" stroke="#ccff00" strokeWidth="1" strokeOpacity="0.2" fill="none" />
   </svg>
 );
 
