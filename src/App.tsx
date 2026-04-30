@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X, Instagram, Mail } from "lucide-react";
 import { useState, useEffect, MouseEvent } from "react";
-import heroImage from "./assets/hero.png";
 
 const logo = `data:image/svg+xml;base64,${btoa(`
 <svg width="300" height="40" viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,18 +10,15 @@ const logo = `data:image/svg+xml;base64,${btoa(`
 `)}`;
 
 const HeroGraphic = () => (
-  <div className="relative w-full h-full overflow-hidden">
-    <img 
-      src={heroImage} 
-      alt="Arnau Anfruns" 
-      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 transform group-hover:scale-105"
+  <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-1000">
+    <image 
+      href="/hero.png" 
+      x="0" y="0" 
+      width="900" height="1600" 
+      preserveAspectRatio="xMidYMid slice"
     />
-    {/* Decorative overlays */}
-    <div className="absolute inset-0 bg-brand-navy/10 pointer-events-none mix-blend-overlay"></div>
-    <div className="absolute inset-0 border border-brand-navy/10 pointer-events-none"></div>
-    {/* Scanline effect */}
-    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_4px,3px_100%] pointer-events-none opacity-20"></div>
-  </div>
+    <rect width="900" height="1600" stroke="#ccff00" strokeWidth="2" strokeOpacity="0.1" fill="none" />
+  </svg>
 );
 
 // --- Components ---
