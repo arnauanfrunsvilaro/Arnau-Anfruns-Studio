@@ -12,7 +12,7 @@ const logo = `data:image/svg+xml;base64,${btoa(`
 const HeroGraphic = () => (
   <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full grayscale transition-all duration-1000">
     <image 
-      href="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=900&h=1600" 
+      href="/me.png" 
       x="0" y="0" 
       width="900" height="1600" 
       preserveAspectRatio="xMidYMid slice"
