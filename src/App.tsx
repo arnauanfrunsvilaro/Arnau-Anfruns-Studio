@@ -10,7 +10,7 @@ const logo = `data:image/svg+xml;base64,${btoa(`
 `)}`;
 
 const HeroGraphic = () => (
-  <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-1000">
+  <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full grayscale transition-all duration-1000">
     <image 
       href="/hero.png" 
       x="0" y="0" 
