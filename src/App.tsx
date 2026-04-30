@@ -1,12 +1,29 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X, Instagram, Mail } from "lucide-react";
 import { useState, useEffect, MouseEvent } from "react";
-import heroImage from "./assets/hero.png";
 
 const logo = `data:image/svg+xml;base64,${btoa(`
 <svg width="300" height="40" viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="300" height="40" fill="transparent"/>
   <text x="0" y="30" fill="white" font-family="Inter, sans-serif" font-weight="900" font-size="24" letter-spacing="0.02em">ARNAU <tspan fill="#ccff00">ANFRUNS</tspan></text>
+</svg>
+`)}`;
+
+const heroImage = `data:image/svg+xml;base64,${btoa(`
+<svg width="800" height="1200" viewBox="0 0 800 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1200" fill="#0a0a0a"/>
+  <circle cx="400" cy="400" r="300" stroke="#ccff00" stroke-width="2" stroke-opacity="0.2"/>
+  <circle cx="400" cy="400" r="280" stroke="#ccff00" stroke-width="1" stroke-opacity="0.1"/>
+  <g stroke="#ccff00" stroke-width="1" stroke-opacity="0.15">
+    <line x1="400" y1="400" x2="400" y2="100"/>
+    <line x1="400" y1="400" x2="400" y2="700"/>
+    <line x1="400" y1="400" x2="100" y2="400"/>
+    <line x1="400" y1="400" x2="700" y2="400"/>
+    <line x1="400" y1="400" x2="187" y2="187"/>
+    <line x1="400" y1="400" x2="613" y2="613"/>
+  </g>
+  <path d="M300 1100L400 400L500 1100" stroke="#ccff00" stroke-width="4" stroke-opacity="0.3"/>
+  <text x="400" y="1050" text-anchor="middle" fill="#ccff00" fill-opacity="0.1" font-family="Inter, sans-serif" font-weight="900" font-size="80">ESTRATEGIA</text>
 </svg>
 `)}`;
 
