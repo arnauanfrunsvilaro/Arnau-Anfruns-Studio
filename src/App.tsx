@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X, Instagram, Mail } from "lucide-react";
 import { useState, useEffect, MouseEvent } from "react";
+import heroImage from "./assets/hero.png";
 
 const logo = `data:image/svg+xml;base64,${btoa(`
 <svg width="300" height="40" viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -8,8 +9,6 @@ const logo = `data:image/svg+xml;base64,${btoa(`
   <text x="0" y="30" fill="white" font-family="Inter, sans-serif" font-weight="900" font-size="24" letter-spacing="0.02em">ARNAU <tspan fill="#ccff00">ANFRUNS</tspan></text>
 </svg>
 `)}`;
-
-const heroImage = "/hero.png";
 
 // --- Components ---
 
