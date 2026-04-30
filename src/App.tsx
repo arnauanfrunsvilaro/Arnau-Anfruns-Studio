@@ -204,20 +204,20 @@ const About = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-             <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center">
-               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">07</span>
+             <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center items-center text-center">
+               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">03</span>
                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-white/40 font-black">Años de Experiencia</span>
              </div>
-             <div className="p-6 sm:p-10 bg-brand-navy text-brand-black flex flex-col justify-center">
-               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">+50</span>
+             <div className="p-6 sm:p-10 bg-brand-navy text-brand-black flex flex-col justify-center items-center text-center">
+               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">+10</span>
                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-black">Clientes</span>
              </div>
-             <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center">
-               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">12M</span>
+             <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center items-center text-center">
+               <span className="text-3xl sm:text-5xl font-black mb-2 tracking-tighter">10K</span>
                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-white/40 font-black">Inversión Publicitaria</span>
              </div>
-             <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center">
-               <span className="text-3xl sm:text-6xl font-black mb-2 tracking-tighter">240%</span>
+             <div className="p-6 sm:p-10 bg-white/5 border border-white/10 flex flex-col justify-center items-center text-center">
+               <span className="text-3xl sm:text-5xl font-black mb-2 tracking-tighter">120%</span>
                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-brand-navy font-black">ROI Medio</span>
              </div>
           </div>
