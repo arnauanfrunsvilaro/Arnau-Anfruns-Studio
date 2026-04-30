@@ -11,11 +11,15 @@ const logo = `data:image/svg+xml;base64,${btoa(`
 `)}`;
 
 const HeroGraphic = () => (
-  <img 
-    src={heroImage} 
-    alt="Arnau Anfruns" 
-    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-  />
+  <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-1000">
+    <image 
+      href={heroImage} 
+      x="0" y="0" 
+      width="900" height="1600" 
+      preserveAspectRatio="xMidYMid slice"
+    />
+    <rect width="900" height="1600" stroke="#ccff00" strokeWidth="2" strokeOpacity="0.1" fill="none" />
+  </svg>
 );
 
 // --- Components ---
@@ -167,7 +171,7 @@ const Hero = () => {
             </a>
             <div className="flex flex-col">
               <span className="text-[10px] uppercase text-white/40 tracking-widest mb-1 font-black">Próxima disponibilidad</span>
-              <span className="text-sm font-mono text-brand-navy">Octubre 2026 — 2 Slots</span>
+              <span className="text-sm font-mono text-brand-navy">Julio 2026 — 3 Slots</span>
             </div>
           </div>
         </motion.div>
