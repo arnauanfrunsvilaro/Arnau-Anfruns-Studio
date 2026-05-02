@@ -10,14 +10,40 @@ const logo = `data:image/svg+xml;base64,${btoa(`
 `)}`;
 
 const HeroGraphic = () => (
-  <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full grayscale transition-all duration-1000">
+  <svg viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full transition-all duration-1000">
+    {/* Fondo base oscuro */}
+    <rect width="900" height="1600" fill="#080808" />
+    
+    {/* Oficina de fondo (muy sutil para dar contexto) */}
     <image 
-      href="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=900&h=1600" 
+      href="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=900&h=1600" 
       x="0" y="0" 
       width="900" height="1600" 
       preserveAspectRatio="xMidYMid slice"
+      className="opacity-20 grayscale"
     />
-    <rect width="900" height="1600" stroke="#ccff00" strokeWidth="2" strokeOpacity="0.1" fill="none" />
+
+    {/* Tu Retrato */}
+    <image 
+      href="/me.png" 
+      x="0" y="0" 
+      width="900" height="1600" 
+      preserveAspectRatio="xMidYMid slice"
+      className="brightness-110 contrast-105"
+    />
+    
+    {/* Degradado para integrar la parte inferior con el diseño */}
+    <defs>
+      <linearGradient id="heroFade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="60%" stopColor="#050505" stopOpacity="0" />
+        <stop offset="90%" stopColor="#050505" stopOpacity="0.6" />
+        <stop offset="100%" stopColor="#050505" stopOpacity="1" />
+      </linearGradient>
+    </defs>
+    <rect width="900" height="1600" fill="url(#heroFade)" pointerEvents="none" />
+
+    {/* Marco técnico elegante */}
+    <rect x="20" y="20" width="860" height="1560" stroke="#ccff00" strokeWidth="1" strokeOpacity="0.15" fill="none" />
   </svg>
 );
 
