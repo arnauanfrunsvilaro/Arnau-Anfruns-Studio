@@ -2,10 +2,10 @@ import { motion } from "motion/react";
 import { ArrowRight, ChevronRight, CheckCircle2, TrendingUp, Zap, Target, Users, Megaphone, BrainCircuit, Menu, X, Instagram, Mail } from "lucide-react";
 import { useState, useEffect, MouseEvent } from "react";
 
-const logo = `data:image/svg+xml;base64,${btoa(`
-<svg width="300" height="40" viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="300" height="40" fill="transparent"/>
-  <text x="0" y="30" fill="white" font-family="Inter, sans-serif" font-weight="900" font-size="24" letter-spacing="0.02em">ARNAU <tspan fill="#ccff00">ANFRUNS</tspan></text>
+const logo = `data:image/svg+xml;utf8,${encodeURIComponent(`
+<svg width="550" height="40" viewBox="0 0 550 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="550" height="40" fill="transparent"/>
+  <text x="0" y="30" fill="white" font-family="Inter, sans-serif" font-weight="900" font-size="24" letter-spacing="0.02em">ARNAU <tspan fill="#ccff00">ANFRUNS VILARÓ</tspan></text>
 </svg>
 `)}`;
 
@@ -94,7 +94,7 @@ const Navbar = () => {
         >
           <img 
             src={logo} 
-            alt="Arnau Anfruns" 
+            alt="Arnau Anfruns Vilaró" 
             className="h-6 md:h-8 w-auto object-contain"
           />
         </a>
@@ -212,7 +212,7 @@ const About = () => {
             <h2 className="text-5xl md:text-6xl font-black mb-10 leading-[0.9] tracking-tighter uppercase">Menos ruido, <br /><span className="text-white/30">más directo.</span></h2>
             <div className="space-y-6 text-white/50 font-medium leading-relaxed md:text-lg">
               <p>
-                Soy <span className="text-brand-white font-bold">Arnau Anfruns</span>, consultor estratégico enfocado en transformar la inversión en publicidad en un activo de alto rendimiento.
+                Soy <span className="text-brand-white font-bold">Arnau Anfruns Vilaró</span>, consultor estratégico enfocado en transformar la inversión en publicidad en un activo de alto rendimiento.
               </p>
               <p>
                 Mi valor reside en el <strong className="text-brand-navy uppercase tracking-widest text-sm">criterio estratégico</strong>. No implemento herramientas por moda; las utilizo para amplificar resultados humanos y empresariales mediante sistemas de IA predictiva.
@@ -220,7 +220,7 @@ const About = () => {
             </div>
             <div className="mt-12 flex items-center gap-6">
                <div className="w-12 h-px bg-brand-navy"></div>
-               <span className="text-[10px] font-black tracking-[0.3em] uppercase text-white/50">BCN // Arnau Anfruns</span>
+               <span className="text-[10px] font-black tracking-[0.3em] uppercase text-white/50">BCN // Arnau Anfruns Vilaró</span>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -470,13 +470,13 @@ const Footer = () => {
         <div className="flex items-center gap-4">
           <img 
             src={logo} 
-            alt="Arnau Anfruns" 
+            alt="Arnau Anfruns Vilaró" 
             className="h-5 w-auto object-contain"
           />
           <span className="text-[10px] font-black uppercase tracking-[0.4em]">BCN</span>
         </div>
         <div className="flex gap-10 text-[9px] font-black uppercase tracking-[0.2em] text-white/40">
-           <span>© 2026 Arnau Anfruns. Todos los derechos reservados.</span>
+           <span>© 2026 Arnau Anfruns Vilaró. Todos los derechos reservados.</span>
         </div>
         <div className="flex gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-brand-navy">
           <a href="https://www.linkedin.com/in/arnau-anfruns-vilaro" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
